@@ -21,11 +21,27 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(hello_world CXX)
 
+## add executable
 add_executable(hello_world hello_world.cpp)
+target_link_arduino_libraries(hello_world PRIVATE core ESP8266WiFi)
 
-# Arduino.h is included in hello_world.cpp, so link with Arduino core
-target_link_arduino_libraries(hello_world PRIVATE core)
+add_executable(esp8266_blink esp8266_blink.cpp)
+target_link_arduino_libraries(esp8266_blink PRIVATE core ESP8266WiFi)
+
+add_executable(esp8266server esp8266server.cpp)
+target_link_arduino_libraries(esp8266server PRIVATE 
+    core 
+    ESP8266WiFi
+    ESP8266WebServer
+    ESP8266mDNS
+)
+
+add_executable(esp8266_dht11 esp8266_dht11.cpp)
+target_link_arduino_libraries(esp8266_dht11 PRIVATE core ESP8266WiFi Adafruit_Unified_Sensor DHT )
 
 # This is needed for the generation of HEX binary and uploading it
 target_enable_arduino_upload(hello_world)
+target_enable_arduino_upload(esp8266server)
+target_enable_arduino_upload(esp8266_blink)
+target_enable_arduino_upload(esp8266_dht11)
 
