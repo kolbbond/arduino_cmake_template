@@ -39,9 +39,13 @@ target_link_arduino_libraries(esp8266server PRIVATE
 add_executable(esp8266_dht11 esp8266_dht11.cpp)
 target_link_arduino_libraries(esp8266_dht11 PRIVATE core ESP8266WiFi Adafruit_Unified_Sensor DHT )
 
+add_executable(esp8266_dht22 esp8266_dht22.cpp)
+target_link_arduino_libraries(esp8266_dht22 PRIVATE core ESP8266WiFi Adafruit_Unified_Sensor DHT )
+
 # This is needed for the generation of HEX binary and uploading it
 target_enable_arduino_upload(hello_world)
 target_enable_arduino_upload(esp8266server)
 target_enable_arduino_upload(esp8266_blink)
 target_enable_arduino_upload(esp8266_dht11)
+target_enable_arduino_upload(esp8266_dht22)
 
